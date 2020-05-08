@@ -6,6 +6,7 @@ export const VirtualGrid = ({
   cell,
   total,
   render,
+  onRender,
   viewportRowOffset: _viewportRowOffset = 4,
   ...props
 }) => {
@@ -91,6 +92,10 @@ export const VirtualGrid = ({
           }
         })
       )
+    }
+
+    if (typeof onRender === 'function') {
+      onRender(children)
     }
 
     return children
