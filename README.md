@@ -1,6 +1,6 @@
 # react-responsive-virtual-grid
 
-> 💀🚟 Dead-simple react virtual grid library that act like a normal `<div>`, you can checkout the [example](https://thcolin.github.io/react-responsive-virtual-grid/)
+> 💀🚟 Dead-simple react virtual grid library that act like a normal `<div>`, checkout [example](https://thcolin.github.io/react-responsive-virtual-grid/)
 
 [![NPM](https://img.shields.io/npm/v/react-responsive-virtual-grid.svg)](https://www.npmjs.com/package/react-responsive-virtual-grid) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
