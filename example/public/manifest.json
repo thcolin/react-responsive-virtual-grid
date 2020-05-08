@@ -1,6 +1,6 @@
 {
-  "short_name": "react-windowed-grid",
-  "name": "react-windowed-grid",
+  "short_name": "react-responsive-virtual-grid",
+  "name": "react-responsive-virtual-grid",
   "icons": [
     {
       "src": "favicon.ico",

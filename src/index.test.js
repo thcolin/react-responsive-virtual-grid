@@ -1,7 +1,7 @@
-import { ExampleComponent } from '.'
+import { VirtualGrid } from '.'
 
-describe('ExampleComponent', () => {
+describe('VirtualGrid', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(VirtualGrid).toBeTruthy()
   })
 })

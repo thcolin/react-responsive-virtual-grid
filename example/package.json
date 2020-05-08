@@ -1,13 +1,13 @@
 {
-  "name": "react-windowed-grid-example",
-  "homepage": "https://thcolin.github.io/react-windowed-grid",
+  "name": "react-responsive-virtual-grid-example",
+  "homepage": "https://thcolin.github.io/react-responsive-virtual-grid",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
     "react-scripts": "link:../node_modules/react-scripts",
-    "react-windowed-grid": "link:.."
+    "react-responsive-virtual-grid": "link:.."
   },
   "scripts": {
     "start": "node ../node_modules/react-scripts/bin/react-scripts.js start",
