@@ -64,13 +64,14 @@ export const VirtualGrid = ({
   )
 
   const children = useMemo(() => {
+    const raw = []
     const children = []
     let index = firstVisibileRowIndex * display.columns.total
     const max = Math.min(
       total,
       index + display.viewport.rows.total * display.viewport.columns.total
     )
-    let row, column
+    let row, column, props
 
     for (index; index < max; index++) {
       row = Math.min(
@@ -78,24 +79,25 @@ export const VirtualGrid = ({
         Math.floor(index / display.columns.total)
       )
       column = index % display.columns.total
-      children.push(
-        render({
-          key: `${row}-${column}`,
-          index,
-          style: {
-            position: 'absolute',
-            height: display.rows.height,
-            width: display.columns.width,
-            transform: `translate3d(${column * display.columns.width}px, ${
-              row * display.rows.height
-            }px, 0px)`
-          }
-        })
-      )
+      props = {
+        key: `${row}-${column}`,
+        index,
+        style: {
+          position: 'absolute',
+          height: display.rows.height,
+          width: display.columns.width,
+          transform: `translate3d(${column * display.columns.width}px, ${
+            row * display.rows.height
+          }px, 0px)`
+        }
+      }
+
+      raw.push(props)
+      children.push(render(props))
     }
 
     if (typeof onRender === 'function') {
-      onRender(children)
+      onRender(raw)
     }
 
     return children
