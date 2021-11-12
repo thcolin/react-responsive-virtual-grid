@@ -27,14 +27,15 @@ yarn add react-responsive-virtual-grid
 import React from 'react'
 import VirtualGrid from 'react-responsive-virtual-grid'
 
-const Item = ({ style, key, index }) => (
-  <div style={{ backgroundColor: 'gainsboro', ...style }} key={key}>
+const Item = ({ style, index }) => (
+  <div style={{ backgroundColor: 'gainsboro', ...style }}>
     <img
       src={`https://picsum.photos/id/${index}/304/160`}
       alt={`Pcisum placeholder #${index}`}
       style={{ objectFit: 'cover' }}
-      width="100%"
-      height="100%"
+      width='100%'
+      height='100%'
+      loading='lazy'
     />
   </div>
 )
