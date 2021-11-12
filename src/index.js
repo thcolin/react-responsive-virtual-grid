@@ -18,12 +18,12 @@ export const VirtualGrid = ({ render: Child, ...props }) => {
 VirtualGrid.propTypes = {
   cell: PropTypes.shape({
     height: PropTypes.number.isRequired,
-    width: PropTypes.number.isRequired
+    width: PropTypes.number.isRequired,
   }).isRequired,
   total: PropTypes.number.isRequired,
   onRender: PropTypes.func,
   viewportRowOffset: PropTypes.number,
-  render: PropTypes.func.isRequired
+  render: PropTypes.func.isRequired,
 }
 
 export default VirtualGrid

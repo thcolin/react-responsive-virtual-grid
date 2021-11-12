@@ -7,14 +7,14 @@ const useVirtualGrid = ({
   total,
   viewportRowOffset: _viewportRowOffset = 4,
   onRender,
-  container
+  container,
 }) => {
   const viewportRowOffset = Math.max(2, Math.round(_viewportRowOffset / 2) * 2)
   const viewport = useWindowSize()
   const windowScrollPosition = useScrollPosition()
   const scrollPosition = Math.max(
     0,
-    windowScrollPosition - container.offsetTop || 0
+    windowScrollPosition - container.offsetTop || 0,
   )
 
   const display = useMemo(() => {
@@ -38,17 +38,17 @@ const useVirtualGrid = ({
       viewport: {
         columns: {
           ...columns,
-          total: columns.total
+          total: columns.total,
         },
         rows: {
           ...rows,
-          total: Math.ceil(viewport.height / rows.height) + viewportRowOffset
-        }
+          total: Math.ceil(viewport.height / rows.height) + viewportRowOffset,
+        },
       },
       container: {
         position: 'relative',
-        height: `${layout.height}px`
-      }
+        height: `${layout.height}px`,
+      },
     }
   }, [
     cell.height,
@@ -57,13 +57,13 @@ const useVirtualGrid = ({
     viewport.width,
     viewportRowOffset,
     total,
-    container?.offsetTop
+    container?.offsetTop,
   ])
 
   const raw = useMemo(() => {
     const firstVisibileRowIndex = Math.max(
       0,
-      Math.floor(scrollPosition / display.rows.height) - viewportRowOffset / 2
+      Math.floor(scrollPosition / display.rows.height) - viewportRowOffset / 2,
     )
 
     const raw = []
@@ -71,13 +71,13 @@ const useVirtualGrid = ({
     let index = firstVisibileRowIndex * display.columns.total
     const max = Math.min(
       total,
-      index + display.viewport.rows.total * display.viewport.columns.total
+      index + display.viewport.rows.total * display.viewport.columns.total,
     )
 
     for (index; index < max; index++) {
       row = Math.min(
         display.rows.total,
-        Math.floor(index / display.columns.total)
+        Math.floor(index / display.columns.total),
       )
       column = index % display.columns.total
 
@@ -90,8 +90,8 @@ const useVirtualGrid = ({
           width: display.columns.width,
           transform: `translate3d(${column * display.columns.width}px, ${
             row * display.rows.height
-          }px, 0px)`
-        }
+          }px, 0px)`,
+        },
       })
     }
 
