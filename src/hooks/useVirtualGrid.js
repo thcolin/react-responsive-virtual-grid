@@ -100,7 +100,7 @@ const useVirtualGrid = ({
     }
 
     return raw
-  }, [scrollPosition, viewportRowOffset, total, display])
+  }, [scrollPosition, viewportRowOffset, total, display, onRender])
 
   return { display, raw }
 }
