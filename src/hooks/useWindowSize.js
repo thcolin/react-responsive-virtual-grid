@@ -1,9 +1,11 @@
 import { useMemo, useEffect, useState } from 'react'
 import nanobounce from 'nanobounce'
 
-const useWindowSize = (debounceTime = 100) => {
+const instant = (fn) => fn()
+
+const useWindowSize = (debounceTime = 32) => {
   const isClient = typeof window === 'object'
-  const debounce = useMemo(() => nanobounce(debounceTime), [debounceTime])
+  const debounce = useMemo(() => debounceTime === 0 ? instant : nanobounce(debounceTime), [debounceTime])
 
   function getSize() {
     return {

@@ -8,10 +8,12 @@ const useVirtualGrid = ({
   viewportRowOffset: _viewportRowOffset = 4,
   onRender,
   container,
+  windowResizeDebounce,
+  scrollDebounce,
 }) => {
   const viewportRowOffset = Math.max(2, Math.round(_viewportRowOffset / 2) * 2)
-  const viewport = useWindowSize()
-  const windowScrollPosition = useScrollPosition()
+  const viewport = useWindowSize(windowResizeDebounce)
+  const windowScrollPosition = useScrollPosition(scrollDebounce)
   const scrollPosition = Math.max(
     0,
     windowScrollPosition - container.offsetTop || 0,

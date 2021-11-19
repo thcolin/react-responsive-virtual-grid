@@ -1,9 +1,11 @@
 import { useMemo, useEffect, useState } from 'react'
 import nanobounce from 'nanobounce'
 
+const instant = (fn) => fn()
+
 const useScrollPosition = (debounceTime = 16) => {
   const isClient = typeof window === 'object'
-  const debounce = useMemo(() => nanobounce(debounceTime), [debounceTime])
+  const debounce = useMemo(() => debounceTime === 0 ? instant : nanobounce(debounceTime), [debounceTime])
 
   function getPosition() {
     return window.scrollY

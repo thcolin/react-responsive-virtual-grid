@@ -24,6 +24,8 @@ VirtualGrid.propTypes = {
   onRender: PropTypes.func,
   viewportRowOffset: PropTypes.number,
   render: PropTypes.func.isRequired,
+  windowResizeDebounce: PropTypes.number,
+  scrollDebounce: PropTypes.number,
 }
 
 export default VirtualGrid
