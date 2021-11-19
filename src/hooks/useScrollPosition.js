@@ -3,7 +3,7 @@ import nanobounce from 'nanobounce'
 
 const instant = (fn) => fn()
 
-const useScrollPosition = (debounceTime = 16) => {
+const useScrollPosition = (debounceTime = 0) => {
   const isClient = typeof window === 'object'
   const debounce = useMemo(() => debounceTime === 0 ? instant : nanobounce(debounceTime), [debounceTime])
 
@@ -12,6 +12,7 @@ const useScrollPosition = (debounceTime = 16) => {
   }
 
   const [scrollPosition, setScrollPosition] = useState(getPosition)
+  const [scrolling, setScrolling] = useState(false)
 
   useEffect(() => {
     if (!isClient) {
@@ -23,14 +24,18 @@ const useScrollPosition = (debounceTime = 16) => {
         return
       }
 
-      debounce(() => setScrollPosition(getPosition()))
+      setScrolling(true)
+      debounce(() => {
+        setScrollPosition(getPosition())
+        setScrolling(false)
+      })
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [debounce])
 
-  return scrollPosition
+  return { scrollPosition, scrolling }
 }
 
 export default useScrollPosition

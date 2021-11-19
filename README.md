@@ -27,11 +27,11 @@ yarn add react-responsive-virtual-grid
 import React from 'react'
 import VirtualGrid from 'react-responsive-virtual-grid'
 
-const Item = ({ style, index }) => (
+const Item = ({ style, index, scrolling }) => (
   <div style={{ backgroundColor: 'gainsboro', ...style }}>
     <img
       src={`https://picsum.photos/id/${index}/304/160`}
-      alt={`Pcisum placeholder #${index}`}
+      alt={`Pcisum placeholder #${index}${scrolling ? ' - scrolling' : ''}`}
       style={{ objectFit: 'cover' }}
       width='100%'
       height='100%'
@@ -47,6 +47,8 @@ const App = ({ ...props }) => (
     render={Item}
     viewportRowOffset={10} // 5 on top, 5 on bottom
     onRender={children => console.log(children)} // maybe useful callback
+    windowResizeDebounce={32} // control window resize render debounce time in ms, can be disabled with "0"
+    scrollDebounce={0} // control scroll render debounce time in ms, can be disabled with "0"
   />
 )
 ```

@@ -1,11 +1,11 @@
 import React from 'react'
 import VirtualGrid from 'react-responsive-virtual-grid'
 
-const Item = ({ style, index }) => (
+const Item = ({ style, index, scrolling }) => (
   <div style={{ backgroundColor: 'gainsboro', ...style }}>
     <img
       src={`https://picsum.photos/id/${index}/304/160`}
-      alt={`Pcisum placeholder #${index}`}
+      alt={`Pcisum placeholder #${index}${scrolling ? ' - scrolling' : ''}`}
       style={{ objectFit: 'cover' }}
       width='100%'
       height='100%'

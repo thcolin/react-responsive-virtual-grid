@@ -13,7 +13,7 @@ const useVirtualGrid = ({
 }) => {
   const viewportRowOffset = Math.max(2, Math.round(_viewportRowOffset / 2) * 2)
   const viewport = useWindowSize(windowResizeDebounce)
-  const windowScrollPosition = useScrollPosition(scrollDebounce)
+  const { scrollPosition: windowScrollPosition, scrolling } = useScrollPosition(scrollDebounce)
   const scrollPosition = Math.max(
     0,
     windowScrollPosition - container.offsetTop || 0,
@@ -86,6 +86,7 @@ const useVirtualGrid = ({
       raw.push({
         key: `${row}-${column}`,
         index,
+        scrolling,
         style: {
           position: 'absolute',
           height: display.rows.height,
@@ -102,7 +103,7 @@ const useVirtualGrid = ({
     }
 
     return raw
-  }, [scrollPosition, viewportRowOffset, total, display, onRender])
+  }, [scrollPosition, scrolling, viewportRowOffset, total, display, onRender])
 
   return { display, raw }
 }
