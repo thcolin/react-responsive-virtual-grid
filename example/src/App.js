@@ -1,7 +1,7 @@
 import React from 'react'
 import VirtualGrid from 'react-responsive-virtual-grid'
 
-const Item = ({ style, index, scrolling }) => (
+const Item = ({ style, index, readyInViewport, scrolling }) => (
   <div style={{ display: 'flex', ...style }}>
     <div
       style={{
@@ -14,7 +14,7 @@ const Item = ({ style, index, scrolling }) => (
         margin: '1em',
       }}
     >
-      <span style={{ position: 'absolute' }}>Pcisum #{index}{scrolling ? ' - Scrolling' : ''}</span>
+      <span style={{ position: 'absolute' }}>Pcisum #{index}{scrolling ? ' - Scrolling' : ''}{readyInViewport ? ' - ReadyInViewport' : ''}</span>
       <img
         src={`https://picsum.photos/id/${index}/304/160`}
         alt={`Pcisum #${index}${scrolling ? ' - Scrolling' : ''}`}

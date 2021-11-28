@@ -27,11 +27,11 @@ yarn add react-responsive-virtual-grid
 import React from 'react'
 import VirtualGrid from 'react-responsive-virtual-grid'
 
-const Item = ({ style, index, scrolling }) => (
+const Item = ({ style, index, scrolling, readyInViewport }) => (
   <div style={{ backgroundColor: 'gainsboro', ...style }}>
     <img
       src={`https://picsum.photos/id/${index}/304/160`}
-      alt={`Pcisum placeholder #${index}${scrolling ? ' - scrolling' : ''}`}
+      alt={`Pcisum placeholder #${index}${scrolling ? ' - scrolling' : ''}${readyInViewport ? ' - readyInViewport' : ''}`}
       style={{ objectFit: 'cover' }}
       width='100%'
       height='100%'
