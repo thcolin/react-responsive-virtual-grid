@@ -17,7 +17,7 @@ const useVirtualGridChildren = ({ firstRowIndex, scrolling, display, onRender })
         key: `${row}-${column}`,
         index,
         scrolling,
-        readyInViewport: readyInViewport.includes(`${row}-${column}`),
+        readyInViewport: !scrolling || readyInViewport.includes(`${row}-${column}`),
         style: {
           position: 'absolute',
           height: display.rows.height,
