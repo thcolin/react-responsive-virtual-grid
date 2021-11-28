@@ -1,18 +1,19 @@
-import { useMemo, useEffect, useState } from 'react'
+import { useMemo, useEffect, useState, useRef } from 'react'
 import nanobounce from 'nanobounce'
 
 const useVirtualGridFirstRowIndex = ({ layout, cell, rowOffset }) => {
   const isClient = typeof window === 'object'
+  const computeFirstRowIndex = useRef()
   const debounce = useMemo(() => nanobounce(200), [])
 
-  function getFirstRowIndex() {
+  computeFirstRowIndex.current = () => {
     const position = Math.max(0, window.scrollY - layout.top)
     const firstVisibleRowIndex = Math.floor(position / cell.height)
     const firstRowIndex = Math.max(0, firstVisibleRowIndex - rowOffset / 2)
     return firstRowIndex
   }
 
-  const [firstRowIndex, setFirstRowIndex] = useState(getFirstRowIndex)
+  const [firstRowIndex, setFirstRowIndex] = useState(computeFirstRowIndex.current)
   const [scrolling, setScrolling] = useState(false)
 
   useEffect(() => {
@@ -20,8 +21,8 @@ const useVirtualGridFirstRowIndex = ({ layout, cell, rowOffset }) => {
       return false
     }
 
-    function handleScroll() {
-      setFirstRowIndex(getFirstRowIndex())
+    const handleScroll = () => {
+      setFirstRowIndex(computeFirstRowIndex.current())
       setScrolling(true)
       debounce(() => setScrolling(false))
     }
