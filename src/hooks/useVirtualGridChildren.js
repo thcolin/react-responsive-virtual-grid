@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react'
+import nanobounce from 'nanobounce'
 
 const useVirtualGridChildren = ({ firstRowIndex, scrolling, display, onRender }) => {
   const [readyInViewport, setReadyInViewport] = useState([])
+  const debounce = useMemo(() => nanobounce(200), [])
 
   const children = useMemo(() => {
     const children = {}
@@ -31,7 +33,11 @@ const useVirtualGridChildren = ({ firstRowIndex, scrolling, display, onRender })
       onRender(Object.values(children))
     }
 
-    if (!scrolling) {
+    if (scrolling) {
+      debounce(() => setReadyInViewport(Object.keys(children)))
+    } else {
+      // remove last setReadyInViewport callback
+      debounce(() => {})
       setReadyInViewport(Object.keys(children))
     }
 
