@@ -2,15 +2,28 @@ import React from 'react'
 import VirtualGrid from 'react-responsive-virtual-grid'
 
 const Item = ({ style, index, scrolling }) => (
-  <div style={{ backgroundColor: 'gainsboro', ...style }}>
-    <img
-      src={`https://picsum.photos/id/${index}/304/160`}
-      alt={`Pcisum placeholder #${index}${scrolling ? ' - scrolling' : ''}`}
-      style={{ objectFit: 'cover' }}
-      width='100%'
-      height='100%'
-      loading='lazy'
-    />
+  <div style={{ display: 'flex', ...style }}>
+    <div
+      style={{
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        backgroundColor: 'gainsboro',
+        margin: '1em',
+      }}
+    >
+      <span style={{ position: 'absolute' }}>Pcisum #{index}{scrolling ? ' - Scrolling' : ''}</span>
+      <img
+        src={`https://picsum.photos/id/${index}/304/160`}
+        alt={`Pcisum #${index}${scrolling ? ' - Scrolling' : ''}`}
+        style={{ objectFit: 'cover' }}
+        width='100%'
+        height='100%'
+        loading='lazy'
+      />
+    </div>
   </div>
 )
 
@@ -24,7 +37,7 @@ const App = ({ ...props }) => {
         <h2>Anywhere, in any Container</h2>
         <VirtualGrid
           total={4000}
-          cell={{ height: 304, width: 160 }}
+          cell={{ height: 160, width: 200 }}
           render={Item}
           viewportRowOffset={10}
         />

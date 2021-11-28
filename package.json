@@ -51,6 +51,7 @@
     "dist"
   ],
   "dependencies": {
-    "nanobounce": "^1.1.0"
+    "nanobounce": "^1.1.0",
+    "react-intersection-observer": "^8.32.5"
   }
 }

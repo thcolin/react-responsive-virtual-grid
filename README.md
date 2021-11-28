@@ -47,8 +47,6 @@ const App = ({ ...props }) => (
     render={Item}
     viewportRowOffset={10} // 5 on top, 5 on bottom
     onRender={children => console.log(children)} // maybe useful callback
-    windowResizeDebounce={32} // control window resize render debounce time in ms, can be disabled with "0"
-    scrollDebounce={0} // control scroll render debounce time in ms, can be disabled with "0"
   />
 )
 ```
