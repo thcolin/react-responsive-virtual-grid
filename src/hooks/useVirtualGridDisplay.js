@@ -17,10 +17,10 @@ const useVirtualGridDisplay = ({ cell, total, rowOffset }) => {
     const rows = {}
     const layout = {}
 
-    layout.width = element.current?.clientWidth
+    layout.width = element.current?.clientWidth || viewport.width
     columns.total = Math.floor(layout.width / cell.width)
     rows.total = Math.ceil(total / columns.total)
-    layout.top = boundingClientRect?.top || 0
+    layout.top = boundingClientRect?.top || element.current?.offsetTop || 0
     layout.height = rows.total * cell.height
     columns.height = layout.height
     columns.width = Math.floor(layout.width / columns.total)
