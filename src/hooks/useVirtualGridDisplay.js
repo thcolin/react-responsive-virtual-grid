@@ -1,15 +1,13 @@
-import { useRef, useCallback, useMemo } from 'react'
-import { useInView } from 'react-intersection-observer'
+import { useRef, useMemo, useState, useLayoutEffect } from 'react'
 import useWindowSize from './useWindowSize'
 
 const useVirtualGridDisplay = ({ cell, total, rowOffset }) => {
-  const element = useRef()
+  const ref = useRef()
   const viewport = useWindowSize()
-  const { ref: registerObserver, entry: { boundingClientRect = {} } = {} } = useInView({ threshold: 0 })
+  const [initial, setInitial] = useState({ width: 0, top: 0 })
 
-  const ref = useCallback((node) => {
-    element.current = node
-    registerObserver(node)
+  useLayoutEffect(() => {
+    setInitial({ width: ref.current?.clientWidth, top: ref.current?.offsetTop })
   }, [])
 
   const { display, style } = useMemo(() => {
@@ -17,10 +15,10 @@ const useVirtualGridDisplay = ({ cell, total, rowOffset }) => {
     const rows = {}
     const layout = {}
 
-    layout.width = element.current?.clientWidth || viewport.width
+    layout.width = ref.current?.clientWidth || initial.width
     columns.total = Math.floor(layout.width / cell.width)
     rows.total = Math.ceil(total / columns.total)
-    layout.top = boundingClientRect?.top || element.current?.offsetTop || 0
+    layout.top = ref.current?.offsetTop || initial.top
     layout.height = rows.total * cell.height
     columns.height = layout.height
     columns.width = Math.floor(layout.width / columns.total)
@@ -52,14 +50,16 @@ const useVirtualGridDisplay = ({ cell, total, rowOffset }) => {
       },
     }
   }, [
+    rowOffset,
+    total,
     cell.height,
     cell.width,
     viewport.height,
     viewport.width,
-    rowOffset,
-    total,
-    element.current?.clientWidth,
-    boundingClientRect?.top,
+    ref.current?.clientWidth,
+    ref.current?.offsetTop,
+    initial.width,
+    initial.top
   ])
 
   return { display, style, ref }
