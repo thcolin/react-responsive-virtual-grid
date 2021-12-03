@@ -4,12 +4,13 @@ import useMeasure from 'react-use-measure'
 import useWindowSize from './useWindowSize'
 
 const useVirtualGridDisplay = ({ cell, total, rowOffset }) => {
+  const isClient = typeof window === 'object'
   const viewport = useWindowSize()
-  const [ref, bounds] = useMeasure(window.ResizeObserver ? {} : { polyfill: ResizeObserver })
+  const [ref, bounds] = useMeasure(isClient && window.ResizeObserver ? {} : { polyfill: ResizeObserver })
   const [initial, setInitial] = useState({ width: 0, top: 0 })
 
   useLayoutEffect(() => {
-    setInitial({ width: ref.current?.offsetWidth, top: ref.current?.offsetTop })
+    setInitial({ width: ref.current?.offsetWidth || 0, top: ref.current?.offsetTop || 0 })
   }, [])
 
   const { display, style } = useMemo(() => {
@@ -20,10 +21,10 @@ const useVirtualGridDisplay = ({ cell, total, rowOffset }) => {
     layout.width = bounds.width || initial.width
     columns.total = Math.floor(layout.width / cell.width)
     rows.total = Math.ceil(total / columns.total)
-    layout.top = (bounds.top || initial.top) + window.scrollY
+    layout.top = Math.floor((bounds.top || initial.top) + (isClient ? window.scrollY : 0))
     layout.height = rows.total * cell.height
     columns.height = layout.height
-    columns.width = Math.floor(layout.width / columns.total)
+    columns.width = Math.floor(layout.width / Math.max(1, columns.total))
     rows.height = cell.height
     rows.width = layout.width
 

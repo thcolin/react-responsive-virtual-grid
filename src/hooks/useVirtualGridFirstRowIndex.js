@@ -7,7 +7,7 @@ const useVirtualGridFirstRowIndex = ({ layout, cell, rowOffset }) => {
   const debounce = useMemo(() => nanobounce(200), [])
 
   computeFirstRowIndex.current = () => {
-    const position = Math.max(0, window.scrollY - layout.top)
+    const position = isClient ? Math.max(0, window.scrollY - layout.top) : 0
     const firstVisibleRowIndex = Math.floor(position / cell.height)
     const firstRowIndex = Math.max(0, firstVisibleRowIndex - rowOffset / 2)
     return firstRowIndex
