@@ -38,7 +38,7 @@ const App = ({ ...props }) => {
         <VirtualGrid
           total={4000}
           cell={{ height: 160, width: 200 }}
-          render={Item}
+          child={Item}
           viewportRowOffset={10}
         />
       </div>

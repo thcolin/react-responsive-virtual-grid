@@ -44,7 +44,7 @@ const App = ({ ...props }) => (
   <VirtualGrid
     total={4000}
     cell={{ height: 304, width: 160 }} // `width` is a `minWidth`, because the grid is reponsive
-    render={Item}
+    child={Item}
     viewportRowOffset={10} // 5 on top, 5 on bottom
     onRender={children => console.log(children)} // maybe useful callback
   />

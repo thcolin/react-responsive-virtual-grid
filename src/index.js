@@ -2,13 +2,13 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import useVirtualGrid from './hooks/useVirtualGrid'
 
-export const VirtualGrid = ({ render: Child, ...props }) => {
+export const VirtualGrid = ({ child: Child, childProps = {}, ...props }) => {
   const { container, children } = useVirtualGrid(props)
 
   return (
     <div {...container}>
       {children.map(({ key, ...props }) => (
-        <Child key={key} {...props} />
+        <Child {...childProps} key={key} {...props} />
       ))}
     </div>
   )
