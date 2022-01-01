@@ -1,5 +1,6 @@
 import { useMemo, useEffect, useState } from 'react'
 import nanobounce from 'nanobounce'
+import { BROWSER_PX_VALUE_LIMIT } from '../constants'
 
 const useWindowSize = () => {
   const isClient = typeof window === 'object'
@@ -7,8 +8,8 @@ const useWindowSize = () => {
 
   function getSize() {
     return {
-      width: isClient ? window.innerWidth : undefined,
-      height: isClient ? window.innerHeight : undefined,
+      width: isClient ? Math.min(BROWSER_PX_VALUE_LIMIT, window.innerWidth) : undefined,
+      height: isClient ? Math.min(BROWSER_PX_VALUE_LIMIT, window.innerHeight) : undefined,
     }
   }
 

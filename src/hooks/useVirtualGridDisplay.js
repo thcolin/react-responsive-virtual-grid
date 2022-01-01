@@ -2,6 +2,7 @@ import { useMemo, useState, useLayoutEffect } from 'react'
 import { ResizeObserver } from '@juggle/resize-observer'
 import useMeasure from 'react-use-measure'
 import useWindowSize from './useWindowSize'
+import { BROWSER_PX_VALUE_LIMIT } from '../constants'
 
 const useVirtualGridDisplay = ({ cell, total, rowOffset }) => {
   const isClient = typeof window === 'object'
@@ -21,6 +22,7 @@ const useVirtualGridDisplay = ({ cell, total, rowOffset }) => {
     layout.width = bounds.width || initial.width
     columns.total = Math.floor(layout.width / cell.width)
     rows.total = Math.ceil(total / columns.total)
+    rows.total = Math.min(rows.total, Math.floor(BROWSER_PX_VALUE_LIMIT / cell.height))
     layout.top = Math.floor((bounds.top || initial.top) + (isClient ? window.scrollY : 0))
     layout.height = rows.total * cell.height
     columns.height = layout.height
@@ -34,7 +36,7 @@ const useVirtualGridDisplay = ({ cell, total, rowOffset }) => {
         columns,
         rows,
         layout,
-        total,
+        total: Math.min(total, rows.total * columns.total),
         rowOffset,
         viewport: {
           columns: {

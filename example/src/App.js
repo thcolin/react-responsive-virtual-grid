@@ -42,7 +42,7 @@ const Child = ({ style, index, data, readyInViewport, scrolling }) => {
         <span style={{ position: 'absolute' }}>Pcisum #{index}{scrolling ? ' - Scrolling' : ''}{readyInViewport ? ' - ReadyInViewport' : ''}</span>
         <img
           src={url}
-          alt={`Pcisum #${index}${scrolling ? ' - Scrolling' : ''}`}
+          alt={`Pcisum #${index}`}
           style={{ objectFit: 'cover' }}
           width='100%'
           height='100%'
@@ -54,7 +54,7 @@ const Child = ({ style, index, data, readyInViewport, scrolling }) => {
 }
 
 const App = ({ ...props }) => {
-  const data = useMemo(() => Array(4000).fill(true).map((_, index) => ({ url: `https://picsum.photos/id/${index}/304/160` })), [])
+  const data = useMemo(() => Array(200000).fill(true).map((_, index) => ({ url: `https://picsum.photos/id/${index}/304/160` })), [])
 
   return (
     <section>
@@ -65,8 +65,8 @@ const App = ({ ...props }) => {
         <h2>Anywhere, in any Container</h2>
         <DataProvider>
           <VirtualGrid
-            total={4000}
-            cell={{ height: 160, width: 200 }}
+            total={200000}
+            cell={{ height: 300, width: 350 }}
             child={Child}
             childProps={{ data }}
             viewportRowOffset={10}
