@@ -1,7 +1,7 @@
 import { useMemo, useEffect, useState, useRef } from 'react'
 import nanobounce from 'nanobounce'
 
-const useVirtualGridFirstRowIndex = ({ layout, cell, rowOffset, scrollContainer }) => {
+const useVirtualGridFirstRowIndex = ({ layout, cell, rowOffset }, scrollContainer) => {
   const isClient = typeof window === 'object'
   const computeFirstRowIndex = useRef()
   const debounce = useMemo(() => nanobounce(200), [])
