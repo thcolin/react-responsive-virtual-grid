@@ -7,7 +7,7 @@ const useVirtualGridFirstRowIndex = ({ layout, cell, rowOffset, scrollContainer 
   const debounce = useMemo(() => nanobounce(200), [])
 
   // Utilize the container that was passed in if so.
-  const container = scrollContainer ?? window;
+  const container = scrollContainer ?? window
 
   computeFirstRowIndex.current = () => {
 
