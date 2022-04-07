@@ -13,8 +13,7 @@ const useVirtualGridFirstRowIndex = ({ layout, cell, rowOffset, scrollContainer 
 
     // window and divs use a different property for scroll
     // position. Determine what we can get.
-    let scrollTop = window.scrollY;
-    if (container.scrollTop) scrollTop = container.scrollTop; 
+    const scrollTop = container === window ? container.scrollY : container.scrollTop
 
     const position = isClient ? Math.max(0, scrollTop - layout.top) : 0
     const firstVisibleRowIndex = Math.floor(position / cell.height)
