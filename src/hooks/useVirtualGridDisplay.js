@@ -20,7 +20,7 @@ const useVirtualGridDisplay = ({ cell, total, rowOffset }) => {
     const layout = {}
 
     layout.width = bounds.width || initial.width
-    columns.total = Math.floor(layout.width / cell.width)
+    columns.total = cell.width ? Math.floor(layout.width / cell.width) : 1
     rows.total = Math.ceil(total / columns.total)
     rows.total = Math.min(rows.total, Math.floor(BROWSER_PX_VALUE_LIMIT / cell.height))
     layout.top = Math.floor((bounds.top || initial.top) + (isClient ? window.scrollY : 0))

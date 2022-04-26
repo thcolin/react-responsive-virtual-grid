@@ -4,7 +4,7 @@ import useVirtualGrid from './hooks/useVirtualGrid'
 
 export const VirtualGrid = ({ child: Child, childProps = {}, useChildProps = null, ...props }) => {
   const { container, children } = useVirtualGrid(props)
-  
+
   return (
     <div {...container}>
       {children.map(({ key, ...props }) => (
@@ -22,7 +22,7 @@ export const VirtualGrid = ({ child: Child, childProps = {}, useChildProps = nul
 VirtualGrid.propTypes = {
   cell: PropTypes.shape({
     height: PropTypes.number.isRequired,
-    width: PropTypes.number.isRequired,
+    width: PropTypes.number,
   }).isRequired,
   total: PropTypes.number.isRequired,
   onRender: PropTypes.func,
@@ -30,7 +30,7 @@ VirtualGrid.propTypes = {
   child: PropTypes.elementType.isRequired,
   childProps: PropTypes.object,
   useChildProps: PropTypes.func,
-  scrollContainer: PropTypes.node
+  scrollContainer: PropTypes.object,
 }
 
 export default memo(VirtualGrid)

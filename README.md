@@ -43,7 +43,7 @@ const Item = ({ style, index, scrolling, readyInViewport }) => (
 const App = ({ ...props }) => (
   <VirtualGrid
     total={4000}
-    cell={{ height: 304, width: 160 }} // `width` is a `minWidth`, because the grid is reponsive
+    cell={{ height: 304, width: 160 }} // `width` is a `minWidth`, because the grid is reponsive (optional if you just want a list)
     child={Item}
     viewportRowOffset={10} // 5 on top, 5 on bottom
     onRender={children => console.log(children)} // maybe useful callback
