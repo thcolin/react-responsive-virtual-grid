@@ -10,7 +10,6 @@ const useVirtualGridFirstRowIndex = ({ layout, cell, rowOffset }, scrollContaine
   const container = scrollContainer ?? window
 
   computeFirstRowIndex.current = () => {
-
     // window and divs use a different property for scroll
     // position. Determine what we can get.
     const scrollTop = container === window ? container.scrollY : container.scrollTop

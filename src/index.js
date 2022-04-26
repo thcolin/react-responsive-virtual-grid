@@ -10,8 +10,8 @@ export const VirtualGrid = ({ child: Child, childProps = {}, useChildProps = nul
       {children.map(({ key, ...props }) => (
         <Child
           {...childProps}
-          {...typeof useChildProps === 'function' ? useChildProps(key) : {}}
           key={key}
+          {...typeof useChildProps === 'function' ? useChildProps(key) : {}}
           {...props}
         />
       ))}
