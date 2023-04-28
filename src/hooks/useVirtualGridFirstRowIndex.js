@@ -36,7 +36,7 @@ const useVirtualGridFirstRowIndex = ({ layout, cell, rowOffset }, scrollContaine
 
     container.addEventListener('scroll', handleScroll)
     return () => container.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [container])
 
   return { firstRowIndex, scrolling }
 }
