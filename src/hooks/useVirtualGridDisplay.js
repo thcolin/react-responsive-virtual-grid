@@ -6,7 +6,6 @@ import { BROWSER_PX_VALUE_LIMIT } from '../constants'
 
 const useVirtualGridDisplay = ({ cell, total, rowOffset }) => {
   const isClient = typeof window === 'object'
-  // const initialScrollY = useMemo(() => isClient ? window.scrollY : 0, [])
   const viewport = useWindowSize()
   const [ref, bounds] = useMeasure(isClient && window.ResizeObserver ? {} : { polyfill: ResizeObserver })
   const [initial, setInitial] = useState({ width: 0, top: 0 })
@@ -24,7 +23,7 @@ const useVirtualGridDisplay = ({ cell, total, rowOffset }) => {
     columns.total = cell.width ? Math.floor(layout.width / cell.width) : 1
     rows.total = Math.ceil(total / columns.total)
     rows.total = Math.min(rows.total, Math.floor(BROWSER_PX_VALUE_LIMIT / cell.height))
-    layout.top = Math.floor((bounds.top || initial.top) /* + initialScrollY */)
+    layout.top = Math.floor(((bounds.top + (isClient ? window.scrollY : 0)) || initial.top))
     layout.height = rows.total * cell.height
     columns.height = layout.height
     columns.width = Math.floor(layout.width / Math.max(1, columns.total))
@@ -66,7 +65,6 @@ const useVirtualGridDisplay = ({ cell, total, rowOffset }) => {
     bounds.top,
     initial.width,
     initial.top,
-    // initialScrollY,
   ])
 
   return { display, style, ref }
