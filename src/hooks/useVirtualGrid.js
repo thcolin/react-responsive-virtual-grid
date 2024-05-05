@@ -4,7 +4,7 @@ import useVirtualGridChildren from './useVirtualGridChildren'
 
 const useVirtualGrid = ({ cell, total, viewportRowOffset = 4, onRender, scrollContainer }) => {
   const rowOffset = Math.max(2, Math.round(viewportRowOffset / 2) * 2)
-  const { display, style, ref } = useVirtualGridDisplay({ cell, total, rowOffset })
+  const { display, style, ref } = useVirtualGridDisplay({ cell, total, rowOffset }, scrollContainer)
   const { firstRowIndex, scrolling } = useVirtualGridFirstRowIndex(display, scrollContainer)
   const children = useVirtualGridChildren({ firstRowIndex, scrolling, display, onRender })
 

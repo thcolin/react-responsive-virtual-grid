@@ -6,15 +6,10 @@ const useVirtualGridFirstRowIndex = ({ layout, cell, rowOffset }, scrollContaine
   const computeFirstRowIndex = useRef()
   const debounce = useMemo(() => nanobounce(200), [])
 
-  // Utilize the container that was passed in if so.
   const container = scrollContainer ?? window
 
   computeFirstRowIndex.current = () => {
-    // window and divs use a different property for scroll
-    // position. Determine what we can get.
-    const scrollTop = container === window ? container.scrollY : container.scrollTop
-
-    const position = isClient ? Math.max(0, scrollTop - layout.top) : 0
+    const position = isClient ? Math.max(0, (container === window ? container.scrollY : container.scrollTop) - layout.top) : 0
     const firstVisibleRowIndex = Math.floor(position / cell.height)
     const firstRowIndex = Math.max(0, firstVisibleRowIndex - rowOffset / 2)
     return firstRowIndex
