@@ -1,19 +1,33 @@
 import { useMemo, useState } from 'react'
 import nanobounce from 'nanobounce'
 
-const useVirtualGridChildren = ({ firstRowIndex, scrolling, display, onRender }) => {
+const useVirtualGridChildren = ({ firstIndex, scrolling, display, onRender }, scrollDirection) => {
   const [readyInViewport, setReadyInViewport] = useState([])
   const debounce = useMemo(() => nanobounce(200), [])
 
   const children = useMemo(() => {
     const children = {}
 
-    let index = firstRowIndex * display.columns.total
-    const max = Math.min(display.total, index + display.viewport.rows.total * display.viewport.columns.total)
+    let index = {
+      vertical: firstIndex * display.columns.total,
+      horizontal: firstIndex * display.rows.total,
+    }[scrollDirection]
+
+    const max = {
+      vertical: Math.min(display.total, index + display.viewport.rows.total * display.viewport.columns.total),
+      horizontal: Math.min(display.total, index + display.viewport.columns.total * display.viewport.rows.total),
+    }[scrollDirection]
 
     for (index; index < max; index++) {
-      const row = Math.min(display.rows.total, Math.floor(index / display.columns.total))
-      const column = index % display.columns.total
+      const row = {
+        vertical: Math.min(display.rows.total, Math.floor(index / display.columns.total)),
+        horizontal: index % display.rows.total,
+      }[scrollDirection]
+
+      const column = {
+        vertical: index % display.columns.total,
+        horizontal: Math.min(display.columns.total, Math.floor(index / display.rows.total)),
+      }[scrollDirection]
 
       children[`${row}-${column}`] = {
         key: `${row}-${column}`,
@@ -42,7 +56,7 @@ const useVirtualGridChildren = ({ firstRowIndex, scrolling, display, onRender })
     }
 
     return Object.values(children)
-  }, [firstRowIndex, display, onRender, scrolling])
+  }, [firstIndex, display, onRender, scrolling, scrollDirection])
 
   return children
 }

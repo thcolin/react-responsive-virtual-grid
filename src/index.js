@@ -20,17 +20,29 @@ export const VirtualGrid = ({ child: Child, childProps = {}, useChildProps = nul
 }
 
 VirtualGrid.propTypes = {
-  cell: PropTypes.shape({
-    height: PropTypes.number.isRequired,
-    width: PropTypes.number,
-  }).isRequired,
+  cell: PropTypes.oneOfType([
+    PropTypes.shape({
+      height: PropTypes.number.isRequired,
+      width: PropTypes.number,
+    }).isRequired,
+    PropTypes.shape({
+      height: PropTypes.number,
+      width: PropTypes.number.isRequired,
+    }).isRequired,
+  ]),
   total: PropTypes.number.isRequired,
   onRender: PropTypes.func,
+  viewportOffset: PropTypes.number,
   viewportRowOffset: PropTypes.number,
   child: PropTypes.elementType.isRequired,
   childProps: PropTypes.object,
   useChildProps: PropTypes.func,
   scrollContainer: PropTypes.object,
+  scrollDirection: PropTypes.oneOf(['horizontal', 'vertical']),
+}
+
+VirtualGrid.defaultProps = {
+  scrollDirection: 'vertical',
 }
 
 export default memo(VirtualGrid)
